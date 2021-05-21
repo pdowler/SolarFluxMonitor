@@ -1,0 +1,2 @@
+nominalObsTime,obsTimePhase,carringtonRotNum,instrument,frequency,fluxObs,fluxAdj,primaryFluxMeasurement,continuousRecordFile
+1964-10-20T12:01:02,MORNING,2.0,FM1,2800,666.0,555.0,true,cadc:DRAO-SFM/FM1_19641020.csv

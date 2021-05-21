@@ -1,0 +1,45 @@
+#!/bin/bash
+
+URL=https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/youcat
+
+SCHEMA=sfm
+TAB=sfm.SolarFluxMeasurement
+
+CMD="curl --cert $HOME/.ssl/cadcproxy.pem"
+
+echo "create table:"
+echo "$CMD -v -H 'Content-Type: text/xml' --upload-file src/${TAB}.xml $URL/tables/$TAB"
+echo
+
+echo "current table:"
+echo "$CMD $URL/tables/$TAB"
+echo
+
+INDEX_COLS="nominalObsTime"
+echo "create indices: $INDEX_COLS"
+for IC in $INDEX_COLS; do
+    echo "$CMD -v -d 'TABLE=${TAB}&INDEX=${IC}' $URL/table-update"
+    echo "$CMD -d 'PHASE=RUN' {jobURL}/phase"
+    echo
+done
+
+
+echo "current permissions:"
+echo "$CMD $URL/permissions/$TAB"
+echo
+
+echo "set permissions:"
+echo "$CMD -H 'Content-Type: text/plain' --data-binary @src/schema-permissions.properties $URL/permissions/$SCHEMA"
+echo
+echo "$CMD -H 'Content-Type: text/plain' --data-binary @src/schema-permissions.properties$URL/permissions/$TAB"
+echo "$CMD -H 'Content-Type: text/plain' -d 'rw-group=ivo://cadc.nrc.ca/gms?DRAO-SFM' $URL/permissions/$TAB"
+echo
+
+echo "query table (anon):"
+echo "curl -L -d 'LANG=ADQL&QUERY=select * from $TAB' $URL/sync"
+echo
+
+
+echo "put sample data:"
+echo "$CMD -H 'Content-Type: text/csv' --data-binary @sample-data.csv $URL/load/$TAB"
+echo

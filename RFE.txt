@@ -1,0 +1,14 @@
+
+* POST /permissions/{object} is very picky about file format (doesn't like blank lines, comments, etc)
+
+* update schema description
+
+* update table description,utype,ucd
+
+* see/explicitly control/update table_index, column_index (via VOSI-table doc)
+
+* update column metadata: description, ucd, unit, utype, xtype in some cases (eg uri)
+
+* enable user to set the tap_schema.columns.id to reference to enable injecting a service-descriptor
+  for downloading a file via it's URI; need a documenented set of service-descritor id(s)
+
