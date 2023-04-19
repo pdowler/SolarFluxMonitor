@@ -31,7 +31,7 @@ echo
 echo "set permissions:"
 echo "$CMD -H 'Content-Type: text/plain' --data-binary @src/schema-permissions.properties $URL/permissions/$SCHEMA"
 echo
-echo "$CMD -H 'Content-Type: text/plain' --data-binary @src/schema-permissions.properties$URL/permissions/$TAB"
+echo "$CMD -H 'Content-Type: text/plain' --data-binary @src/schema-permissions.properties $URL/permissions/$TAB"
 echo "$CMD -H 'Content-Type: text/plain' -d 'rw-group=ivo://cadc.nrc.ca/gms?DRAO-SFM' $URL/permissions/$TAB"
 echo
 
