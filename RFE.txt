@@ -12,3 +12,8 @@
 * enable user to set the tap_schema.columns.id to reference to enable injecting a service-descriptor
   for downloading a file via it's URI; need a documenented set of service-descritor id(s)
 
+* update row by primary key
+
+* some kinds of alter table
+
+* some kinds of delete with where?
